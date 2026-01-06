@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIt</title>
+    <link rel="stylesheet" href="stylel.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-search-location"></i>
+                <h1>FindIt...</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#report">Report Item</a></li>
+                    <li><a href="#items">View Items</a></li>
+                    <li><a href="#stats">Statistics</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2> Find Your Lost Items</h2>
+            <p>Lost something? Found something? Report here and help your peers</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('report')">
+                    <i class="fas fa-exclamation-circle"></i> Report Lost Item
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('items')">
+                    <i class="fas fa-search"></i> Search Found Items
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stat-card">
+                <i class="fas fa-box-open"></i>
+                <h3 id="totalLost">0</h3>
+                <p>Lost Items</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <h3 id="totalFound">0</h3>
+                <p>Found Items</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-handshake"></i>
+                <h3 id="totalReturned">0</h3>
+                <p>Items Returned</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <h3 id="recentItems">0</h3>
+                <p>Recent Reports</p>
+            </div>
+        </div>
+    </section> 
+
+    <!-- Report Section -->
+    <section id="report" class="report-section">
+        <div class="container">
+            <h2 class="section-title">Report an Item</h2>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('lost')">
+                    <i class="fas fa-frown"></i> Lost Item
+                </button>
+                <button class="tab-btn" onclick="switchTab('found')">
+                    <i class="fas fa-smile"></i> Found Item
+                </button>
+            </div>
+
+            <!-- Lost Item Form -->
+            <div id="lostForm" class="form-container active">
+                <form id="reportLostForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lostItemName">
+                                <i class="fas fa-tag"></i> Item Name *
+                            </label>
+                            <input type="text" id="lostItemName" required placeholder="e.g., Black Wallet, iPhone 13">
+                        </div>
+                        <div class="form-group">
+                            <label for="lostCategory">
+                                <i class="fas fa-list"></i> Category *
+                            </label>
+                            <select id="lostCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Books">Books & Stationery</option>
+                                <option value="Clothing">Clothing & Accessories</option>
+                                <option value="ID Cards">ID Cards & Documents</option>
+                                <option value="Keys">Keys & Keychains</option>
+                                <option value="Bags">Bags & Backpacks</option>
+                                <option value="Sports">Sports Equipment</option>
+                                <option value="Jewelry">Jewelry & Watches</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lostDate">
+                                <i class="fas fa-calendar"></i> Date Lost *
+                            </label>
+                            <input type="date" id="lostDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lostLocation">
+                                <i class="fas fa-map-marker-alt"></i> Location *
+                            </label>
+                            <input type="text" id="lostLocation" required placeholder="e.g., Library, Canteen, Lab 3">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lostDescription">
+                            <i class="fas fa-align-left"></i> Description *
+                        </label>
+                        <textarea id="lostDescription" required rows="4" placeholder="Provide detailed description: color, brand, unique features..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lostReporterName">
+                                <i class="fas fa-user"></i> Your Name *
+                            </label>
+                            <input type="text" id="lostReporterName" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="lostReporterContact">
+                                <i class="fas fa-phone"></i> Contact Number *
+                            </label>
+                            <input type="tel" id="lostReporterContact" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lostReporterEmail">
+                            <i class="fas fa-envelope"></i> Email (Optional)
+                        </label>
+                        <input type="email" id="lostReporterEmail" placeholder="your.email@college.edu">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lostImage">
+                            <i class="fas fa-image"></i> Upload Image (Optional)
+                        </label>
+                        <input type="file" id="lostImage" accept="image/*">
+                        <small>Max size: 5MB | Formats: JPG, PNG, GIF</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Submit Lost Report
+                    </button>
+                </form>
+            </div>
+
+            <!-- Found Item Form -->
+            <div id="foundForm" class="form-container">
+                <form id="reportFoundForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foundItemName">
+                                <i class="fas fa-tag"></i> Item Name *
+                            </label>
+                            <input type="text" id="foundItemName" required placeholder="e.g., Blue Water Bottle, Textbook">
+                        </div>
+                        <div class="form-group">
+                            <label for="foundCategory">
+                                <i class="fas fa-list"></i> Category *
+                            </label>
+                            <select id="foundCategory" required>
+                                <option value="">Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Books">Books & Stationery</option>
+                                <option value="Clothing">Clothing & Accessories</option>
+                                <option value="ID Cards">ID Cards & Documents</option>
+                                <option value="Keys">Keys & Keychains</option>
+                                <option value="Bags">Bags & Backpacks</option>
+                                <option value="Sports">Sports Equipment</option>
+                                <option value="Jewelry">Jewelry & Watches</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foundDate">
+                                <i class="fas fa-calendar"></i> Date Found *
+                            </label>
+                            <input type="date" id="foundDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="foundLocation">
+                                <i class="fas fa-map-marker-alt"></i> Location Found *
+                            </label>
+                            <input type="text" id="foundLocation" required placeholder="e.g., Ground Floor Corridor, Parking Area">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foundDescription">
+                            <i class="fas fa-align-left"></i> Description *
+                        </label>
+                        <textarea id="foundDescription" required rows="4" placeholder="Provide detailed description to help identify the owner..."></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foundReporterName">
+                                <i class="fas fa-user"></i> Your Name *
+                            </label>
+                            <input type="text" id="foundReporterName" required placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="foundReporterContact">
+                                <i class="fas fa-phone"></i> Contact Number *
+                            </label>
+                            <input type="tel" id="foundReporterContact" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foundReporterEmail">
+                            <i class="fas fa-envelope"></i> Email (Optional)
+                        </label>
+                        <input type="email" id="foundReporterEmail" placeholder="your.email@college.edu">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foundImage">
+                            <i class="fas fa-image"></i> Upload Image (Optional)
+                        </label>
+                        <input type="file" id="foundImage" accept="image/*">
+                        <small>Max size: 5MB | Formats: JPG, PNG, GIF</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foundStorageLocation">
+                            <i class="fas fa-warehouse"></i> Where is the item kept? *
+                        </label>
+                        <input type="text" id="foundStorageLocation" required placeholder="e.g., Security Office, Department Office">
+                    </div>
+
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Submit Found Report
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Items Display Section -->
+    <section id="items" class="items-section">
+        <div class="container">
+            <h2 class="section-title">Browse Items</h2>
+            
+            <!-- Search and Filter -->
+            <div class="search-filter-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search by item name, location, description...">
+                </div>
+                
+                <div class="filter-controls">
+                    <select id="typeFilter">
+                        <option value="all">All Items</option>
+                        <option value="lost">Lost Items</option>
+                        <option value="found">Found Items</option>
+                    </select>
+                    
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Books">Books & Stationery</option>
+                        <option value="Clothing">Clothing & Accessories</option>
+                        <option value="ID Cards">ID Cards & Documents</option>
+                        <option value="Keys">Keys & Keychains</option>
+                        <option value="Bags">Bags & Backpacks</option>
+                        <option value="Sports">Sports Equipment</option>
+                        <option value="Jewelry">Jewelry & Watches</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    
+                    <select id="sortFilter">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="name">By Name</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Items Grid -->
+            <div id="itemsGrid" class="items-grid">
+                <!-- Items will be dynamically loaded here -->
+            </div>
+
+            <div id="noItemsMessage" class="no-items" style="display: none;">
+                <i class="fas fa-inbox"></i>
+                <p>No items found matching your search.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="stats" class="stats-section">
+        <div class="container">
+            <h2 class="section-title">Statistics & Insights</h2>
+            <div class="stats-grid">
+                <div class="stat-detail-card">
+                    <h3><i class="fas fa-chart-pie"></i> Category Breakdown</h3>
+                    <div id="categoryStats" class="category-stats"></div>
+                </div>
+                <div class="stat-detail-card">
+                    <h3><i class="fas fa-map-marked-alt"></i> Most Common Locations</h3>
+                    <div id="locationStats" class="location-stats"></div>
+                </div>
+                <div class="stat-detail-card">
+                    <h3><i class="fas fa-calendar-week"></i> Recent Activity</h3>
+                    <div id="recentActivity" class="recent-activity"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-building"></i>
+                    <h3>GITM ADMIN BLOCK</h3>
+                    <p>Ground Floor, Admin Block</p>
+                    <p>Mon-Fri: 9:00 AM - 5:00 PM</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Phone</h3>
+                    <p>+91 7217624846</p>
+                    
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>vanshikachy01@gmail.com</p>
+                    <p>Response within 24 hours</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+       
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#report">Report</a>
+                <a href="#items">Browse</a>
+                <a href="#contact">Contact</a>
+            </div>
+       
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Item Detail Modal -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
